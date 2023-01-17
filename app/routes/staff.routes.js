@@ -10,19 +10,22 @@ module.exports = function(app) {
     next();
   });
 
-  app.get("/api/test/all", controller.allAccess);
+  app.get("/api/test/all", 
+    controller.allAccess );
 
-  app.get("/api/test/staff", [authJwt.verifyToken], controller.userBoard);
+  app.get("/api/test/pdaStaff", 
+    [ authJwt.verifyToken ], 
+    controller.pdaStaffPlatform );
 
   app.get(
-    "/api/test/mod",
-    [authJwt.verifyToken, authJwt.isModerator],
-    controller.moderatorBoard
+    "/api/test/projectAdmin",
+    [ authJwt.verifyToken, authJwt.isProjectAdmin ],
+    controller.projectAdminsPlatform
   );
 
   app.get(
-    "/api/test/admin",
-    [authJwt.verifyToken, authJwt.isAdmin],
-    controller.adminBoard
+    "/api/test/planetAdmin",
+    [ authJwt.verifyToken, authJwt.isPlanetAdmin ],
+    controller.planetAdminsPlatform
   );
 };

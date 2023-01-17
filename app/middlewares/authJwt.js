@@ -20,7 +20,7 @@ verifyToken = (req, res, next) => {
   });
 };
 
-isAdmin = (req, res, next) => {
+isProjectAdmin = (req, res, next) => {
   Staff.findById(req.staffId).exec((err, staff) => {
     if (err) {
       res.status(500).send({ message: err });
@@ -38,20 +38,20 @@ isAdmin = (req, res, next) => {
         }
 
         for (let i = 0; i < roles.length; i++) {
-          if (roles[i].name === "admin") {
+          if (roles[i].name === "project-admin") {
             next();
             return;
           }
         }
 
-        res.status(403).send({ message: "Require Admin Role!" });
+        res.status(403).send({ message: "Require Project Admin Role!" });
         return;
       }
     );
   });
 };
 
-isModerator = (req, res, next) => {
+isPlanetAdmin = (req, res, next) => {
   Staff.findById(req.staffId).exec((err, staff) => {
     if (err) {
       res.status(500).send({ message: err });
@@ -69,13 +69,13 @@ isModerator = (req, res, next) => {
         }
 
         for (let i = 0; i < roles.length; i++) {
-          if (roles[i].name === "moderator") {
+          if (roles[i].name === "planet-admin") {
             next();
             return;
           }
         }
 
-        res.status(403).send({ message: "Require Moderator Role!" });
+        res.status(403).send({ message: "Require Planet Admin Role!" });
         return;
       }
     );
@@ -84,7 +84,7 @@ isModerator = (req, res, next) => {
 
 const authJwt = {
   verifyToken,
-  isAdmin,
-  isModerator,
+  isProjectAdmin,
+  isPlanetAdmin,
 };
 module.exports = authJwt;

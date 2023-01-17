@@ -1,15 +1,15 @@
 exports.allAccess = (req, res) => {
-  res.status(200).send("Public Content.");
+  res.status(200).send("Authentication Content.");
 };
 
-exports.userBoard = (req, res) => {
-  res.status(200).send("User Content.");
+exports.pdaStaffPlatform = (req, res) => {
+  res.status(200).send("PDA Staff Content.");
 };
 
-exports.adminBoard = (req, res) => {
-  res.status(200).send("Admin Content.");
+exports.projectAdminsPlatform = (req, res) => {
+  res.status(200).send("Project Admin Content.");
 };
 
-exports.moderatorBoard = (req, res) => {
-  res.status(200).send("Moderator Content.");
+exports.planetAdminsPlatform = (req, res) => {
+  res.status(200).send("Planet Admin Content.");
 };
