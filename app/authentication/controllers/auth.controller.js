@@ -6,7 +6,14 @@ const Role = db.role;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
+try {
+
+
 exports.signup = (req, res) => {
+
+  console.log(req.body)
+  console.log( req.body.surname)
+
   const staff = new Staff({
     surname: req.body.surname,
     givenName: req.body.givenName,
@@ -40,7 +47,7 @@ exports.signup = (req, res) => {
               return;
             }
 
-            res.send({ message: "Staff was registered successfully!" });
+            res.send({ message: `${req.body.surname} registered successfully!` });
           });
         }
       );
@@ -58,12 +65,19 @@ exports.signup = (req, res) => {
             return;
           }
 
-          res.send({ message: "Staff was registered successfully!" });
+          res.send({ message: `${req.body.surname} registered successfully!` });
         });
       });
     }
   });
 };
+}
+
+catch (err){
+
+  console.error(err);
+
+}
 
 exports.signin = (req, res) => {
   Staff.findOne({

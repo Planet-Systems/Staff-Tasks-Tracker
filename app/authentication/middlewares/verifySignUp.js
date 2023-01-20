@@ -3,14 +3,13 @@ const ROLES = db.ROLES;
 const Staff = db.staff;
 
 checkDuplicateEmailOrPhoneNumber = (req, res, next) => {
-  // Username
-  Staff.findOne({
-    phoneNumber: req.body.phoneNumber
-  }).exec((err, staff) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
+  // Phone Number
+  Staff.findOne({ phoneNumber: req.body.phoneNumber })
+    .exec((err, staff) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
 
     if (staff) {
       res.status(400).send({ message: "Failed! Phone Number is already in use!" });
